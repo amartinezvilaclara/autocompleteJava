@@ -1,7 +1,6 @@
 package com.AnaMartinez.Wincom.autocomplete.tests;
 
 import com.AnaMartinez.Wincom.autocomplete.Autocomplete;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
@@ -9,10 +8,6 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class AutocompleteTest {
-
-    @Before
-    public void setUp() throws Exception {
-    }
 
     @Test
     public void theAutocompleteHasAKeywordsDataStructureObject(){
@@ -32,7 +27,7 @@ public class AutocompleteTest {
         Autocomplete autocomplete = new Autocomplete();
         List<String> keywordList = autocomplete.getKeywords();
         assertEquals("Bowl",keywordList.get(0));
-        System.out.println("kewords: " + keywordList);
+        System.out.println("Ordered kewords: " + keywordList);
     }
 
     @Test
@@ -66,9 +61,21 @@ public class AutocompleteTest {
     @Test
     public void theAutocompletionReturnsAMaximumOf4Suggestions(){
         Autocomplete autocomplete = new Autocomplete();
-        List<String> suggestedAutocompletions = autocomplete.getAutocompleteSuggestions("pro");
+        List<String> suggestedAutocompletions = autocomplete.getAutocompleteSuggestions("p");
         assertEquals(4,suggestedAutocompletions.size());
-        System.out.println(suggestedAutocompletions);
+        System.out.println("example 1, search for \"p\": " + suggestedAutocompletions);
+
+        suggestedAutocompletions = autocomplete.getAutocompleteSuggestions("pr");
+        assertEquals(4,suggestedAutocompletions.size());
+        System.out.println("example 2, search for \"pr\": " + suggestedAutocompletions);
+
+        suggestedAutocompletions = autocomplete.getAutocompleteSuggestions("pro");
+        assertEquals(4,suggestedAutocompletions.size());
+        System.out.println("example 3, search for \"pro\": " + suggestedAutocompletions);
+
+        suggestedAutocompletions = autocomplete.getAutocompleteSuggestions("prog");
+        assertEquals(4,suggestedAutocompletions.size());
+        System.out.println("example 4, search for \"prog\": " + suggestedAutocompletions);
     }
 }
 

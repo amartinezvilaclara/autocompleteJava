@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Autocomplete {
-    private static final int MAXIMUM_SUGGESTIONS = 4;
+    public static final int MAXIMUM_SUGGESTIONS = 4;
     private List<String> keywords;
 
     public Autocomplete() {
@@ -22,11 +22,20 @@ public class Autocomplete {
         return keywords;
     }
 
+    /**
+     * Function that searches the keywords for suggested autocompletions given a string.
+     *
+     * @param s input string
+     * @return List of Strings, containing the keywords suggested (up to MAXIMUM_SUGGESTIONS)
+     */
     public List<String> getAutocompleteSuggestions(String s) {
+        /*The algorithm compares the string and keyword in lowercase (to make it case insensitive).
+        * The loop goes through the keywords list and exits at the end of the list, when the first letter of the
+        * keyword is bigger than the first char of the input string, or when the maximum number of suggestions has ben found.
+        * The stored suggestions are case sensitive.*/
         List<String> suggestions = new ArrayList<>();
         if(s != null) {
             if (!s.equals("")) {
-                //both strings are turned to lowercase to make the comparison case insensitive.
                 s.toLowerCase();
                 boolean finish = false;
                 int i = 0;
@@ -34,7 +43,6 @@ public class Autocomplete {
                     String keyword = keywords.get(i).toLowerCase();
                     if (s.charAt(0) < keyword.charAt(0)) finish = true;
                     else if (keyword.startsWith(s)) {
-                        //the saved suggestion is the keyword orginial stored, to retrieve any uppercase Letter.
                         suggestions.add(keywords.get(i));
                         if(suggestions.size() == MAXIMUM_SUGGESTIONS) finish = true;
                     }
@@ -44,4 +52,6 @@ public class Autocomplete {
         }
         return suggestions;
     }
+
+
 }
