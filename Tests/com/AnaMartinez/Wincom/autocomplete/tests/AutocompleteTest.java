@@ -36,12 +36,39 @@ public class AutocompleteTest {
     }
 
     @Test
-    public void theAutocompletionReturnTheNumberOfSuggestions(){
+    public void theAutocompletionReturnsTheSuggestionsGivenAnInput(){
         Autocomplete autocomplete = new Autocomplete();
-        String [] suggestedAutocompletions = new String[4];
-        int numberOfSuggestions = autocomplete.getAutocompleteSuggestions("a", suggestedAutocompletions);
-        assertEquals(0, numberOfSuggestions);
+        List<String> suggestedAutocompletions = autocomplete.getAutocompleteSuggestions("a");
+        assertEquals(0,suggestedAutocompletions.size());
+
+        suggestedAutocompletions = autocomplete.getAutocompleteSuggestions("b");
+        assertEquals(1,suggestedAutocompletions.size());
+
+        suggestedAutocompletions = autocomplete.getAutocompleteSuggestions("project");
+        assertEquals(2,suggestedAutocompletions.size());
+
     }
 
+    @Test
+    public void theAutocompletionReturns0WhenTheInputIsAnEmptyString(){
+        Autocomplete autocomplete = new Autocomplete();
+        List<String> suggestedAutocompletions = autocomplete.getAutocompleteSuggestions("");
+        assertEquals(0,suggestedAutocompletions.size());
+    }
+
+    @Test
+    public void theAutocompletionReturns0WhenTheInputIsANullString(){
+        Autocomplete autocomplete = new Autocomplete();
+        List<String> suggestedAutocompletions = autocomplete.getAutocompleteSuggestions(null);
+        assertEquals(0,suggestedAutocompletions.size());
+    }
+
+    @Test
+    public void theAutocompletionReturnsAMaximumOf4Suggestions(){
+        Autocomplete autocomplete = new Autocomplete();
+        List<String> suggestedAutocompletions = autocomplete.getAutocompleteSuggestions("pro");
+        assertEquals(4,suggestedAutocompletions.size());
+        System.out.println(suggestedAutocompletions);
+    }
 }
 
