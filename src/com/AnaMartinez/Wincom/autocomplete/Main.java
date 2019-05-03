@@ -20,6 +20,6 @@ public class Main {
         suggestedAutocompletions = autocomplete.getAutocompleteSuggestions("prog");
         System.out.println("example 4, search for \"prog\": " + suggestedAutocompletions);
 
-        
+
     }
 }
